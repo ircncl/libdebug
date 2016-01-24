@@ -3,25 +3,23 @@
 #include <errno.h>
 #include <stdio.h>
 
-int main ()
+extern int LIBDEBUG;
+int LIBDEBUG = 1; /* required for debug() lines to do anything */
+
+int main(void)
 {
-	LIBDEBUG = 1; /* required for debug() lines to do anything */
+	int local_errno;
 
 	errno = 0;
 	pline(1, "/etc/passwd");
-	if(errno)
-		perror("pline");
+	local_errno = errno;
 
-	errno = 0;
-	debug(-20, "Out of range\n");
-	if(errno)
-		perror("pline");
+	debug(-3, "pline returned %d\n", local_errno);
 
-	errno = 0;
-	debug(-4, "In range!\n");
-	if(errno)
-		perror("pline");
+	LIBDEBUG = 0; /* Disable libdebug */
 
-	return errno;
+	debug(0, "This line now does nothing\n","");
+	/* ,"" required by C99 but most compilers don't need it */
+
 	return errno;
 }
