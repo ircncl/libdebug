@@ -36,6 +36,6 @@ static inline int libdebug_wrapper (const int line, const char *path,
 }
 
 #define debug(l, s, ...) \
-	libdebug_wrapper(__LINE__+l, __FILE__, __func__, s, ##__VA_ARGS__);\
+	libdebug_wrapper(__LINE__+l, __FILE__, __func__, s, ##__VA_ARGS__)
 
 #endif
