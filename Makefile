@@ -23,7 +23,7 @@ uninstall:
 	ldconfig
 
 clean:
-	rm libdebug.so
-	rm test
+	rm -f libdebug.so
+	rm -f test
 all:
 	libdebug.so
