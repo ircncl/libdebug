@@ -8,7 +8,8 @@
 #include <stdarg.h>
 
 int pline (const int line, const char *path);
-int LIBDEBUG;
+
+extern int LIBDEBUG;
 
 static inline int libdebug_wrapper (const int line, const char *path,
                                     const char *func, const char *fmt, ...)

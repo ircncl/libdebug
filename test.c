@@ -3,7 +3,6 @@
 #include <errno.h>
 #include <stdio.h>
 
-extern int LIBDEBUG;
 int LIBDEBUG = 1; /* required for debug() lines to do anything */
 
 int main(void)
