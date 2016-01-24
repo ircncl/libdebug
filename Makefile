@@ -6,8 +6,7 @@ CCDYNAMIC= ${CCFLAGS} -fPIC
 LDDYNAMIC= ${LDFLAGS} -shared -L. -Wl,-rpath,/usr/local/lib -Wl,-z,relro -Wl,-z,now -fPIE
 
 libdebug.so: debug.c
-	${CC} ${CCDYNAMIC} ${HARDENING} ${WARNINGS} \
-	${LDDYNAMIC} -o $@ $^
+	${CC} ${CCDYNAMIC} ${HARDENING} ${WARNINGS} ${LDDYNAMIC} -o $@ $^
 
 install:
 	cp libdebug.so /usr/local/lib
@@ -15,7 +14,10 @@ install:
 	ldconfig
 
 test: libdebug.so
-	${CC} ${WARNINGS} ${HARDENING} -I. -L. -ldebug  $@.c -o $@
+	${CC} ${WARNINGS} ${HARDENING} debug.c test.c -o test
+
+testdebug: libdebug.so
+	${CC} ${WARNINGS} ${HARDENING} -DDEBUG debug.c test.c -o test
 
 uninstall:
 	rm -i /usr/local/lib/libdebug.so
